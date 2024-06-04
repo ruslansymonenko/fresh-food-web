@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+import {Golos_Text} from "next/font/google";
+import "./globals.scss";
+import Navbar from '@/components/ui/navbar/Navbar';
 
-const inter = Inter({ subsets: ["latin"] });
+const font = Golos_Text({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +17,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={font.className}>
+        <Navbar/>
+        {children}
+      </body>
     </html>
   );
 }
