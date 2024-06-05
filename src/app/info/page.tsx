@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Info from '@/components/ui/info/Info';
 
 export const metadata: Metadata = {
   title: 'Fresh Food Info',
@@ -6,5 +7,9 @@ export const metadata: Metadata = {
 };
 
 export default function InfoPage() {
-  return <div>Info</div>;
+  return (
+    <div className="flex items-center justify-center w-full">
+      <Info />
+    </div>
+  );
 }

@@ -1,13 +1,17 @@
-import React from 'react';
+'use client';
 
+import { FC } from 'react';
 import styles from './Navbar.module.scss';
 import Link from 'next/link';
 import { menu } from '@/components/ui/navbar/menu.data';
 import MenuItem from '@/components/ui/navbar/MenuItem';
 import NavbarTop from '@/components/ui/navbar/NavbarTop';
 import AppSearch from '@/components/ui/search/Search';
+import { useSession, signOut } from 'next-auth/react';
 
-const Navbar = () => {
+const Navbar: FC = () => {
+  const session = useSession();
+
   return (
     <header className={styles.header}>
       <NavbarTop />
@@ -25,6 +29,14 @@ const Navbar = () => {
         </div>
         <div className="flex items-center justify-between">
           <AppSearch />
+          {session?.data ? <Link href="/profile"></Link> : ''}
+          {session?.data ? (
+            <Link href="/logout" onClick={() => signOut({ callbackUrl: '/' })}>
+              Log out
+            </Link>
+          ) : (
+            <Link href="/api/auth">Auth</Link>
+          )}
         </div>
       </div>
     </header>
