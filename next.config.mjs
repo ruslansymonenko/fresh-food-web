@@ -4,10 +4,15 @@ const nextConfig = {
     remotePatterns: [
       {
         hostname: 'localhost',
-
       }
     ]
-  }
+  },
+  headers: [
+    {
+      key: 'Cache-Control',
+      value: 'no-cache', //for development
+    }
+  ]
 };
 
 export default nextConfig;

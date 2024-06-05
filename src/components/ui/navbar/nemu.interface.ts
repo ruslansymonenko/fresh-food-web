@@ -1,4 +1,4 @@
 export interface IMenuItem {
-  link: string,
-  name: string
+  link: string;
+  name: string;
 }
