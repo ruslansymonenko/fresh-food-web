@@ -1,0 +1,15 @@
+.form {
+  @apply font-[sans-serif] text-[#333] min-h-screen flex items-center justify-center px-4;
+}
+
+.left_text {
+  @apply grid md:grid-cols-2 items-center gap-10 max-w-6xl w-full;
+}
+
+.text_title {
+  @apply lg:text-5xl text-4xl font-extrabold lg:leading-[55px];
+}
+
+.text_link {
+  @apply text-rose-600 font-semibold hover:underline ml-1;
+}

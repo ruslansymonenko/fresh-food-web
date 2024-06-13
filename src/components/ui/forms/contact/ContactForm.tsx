@@ -8,7 +8,7 @@ import styles from './ContactForm.module.scss';
 
 const ContactForm: FC = () => {
   return (
-    <div className="my-6">
+    <div className="my-8">
       <div className={styles.form}>
         <div>
           <h1 className="text-3xl font-extrabold">Let's Talk</h1>

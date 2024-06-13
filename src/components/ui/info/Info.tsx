@@ -3,7 +3,7 @@ import { Check } from 'lucide-react';
 
 const Info: FC = () => {
   return (
-    <div className="bg-white px-6 font-[sans-serif]">
+    <div className="bg-white px-6 font-[sans-serif] mb-10">
       <h2 className="text-3xl font-extrabold text-rose-600 mb-10">Frequently Asked Questions</h2>
       <div className="space-y-8 max-w-4xl">
         <div className="flex items-start">

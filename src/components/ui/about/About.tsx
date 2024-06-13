@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 const About: FC = () => {
   return (
-    <div className="bg-white px-6 font-[sans-serif]">
+    <div className="bg-white text-[#333] font-[sans-serif] mx-auto max-w-2xl px-4 sm:pb-6 lg:max-w-7xl mb-10">
       <div className="grid lg:grid-cols-3 gap-6">
         <div>
           <h2 className="text-2xl font-bold text-[#333]">Frequently asked questions</h2>

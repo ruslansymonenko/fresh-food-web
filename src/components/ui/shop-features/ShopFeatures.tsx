@@ -2,11 +2,9 @@ import { FC } from 'react';
 
 const ShopFeatures: FC = () => {
   return (
-    <div className="bg-[#F7F7F7] text-[#333] font-[sans-serif] mx-auto max-w-2xl px-4 sm:pb-6 lg:max-w-7xl">
+    <div className="bg-[#F7F7F7] text-[#333] font-[sans-serif] mx-auto max-w-2xl px-4 sm:pb-6 lg:max-w-7xl mb-10">
       <div className="max-w-6xl mx-auto py-16 px-4">
-        <h2 className="text-4xl font-extrabold text-center mb-16">
-          Discover Our Exclusive Features
-        </h2>
+        <h2 className="text-4xl font-extrabold text-center mb-16">Discover Our Features</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-md:max-w-md mx-auto">
           <div className="bg-white rounded-lg overflow-hidden shadow-lg">
             <div className="p-6">
@@ -75,7 +73,7 @@ const ShopFeatures: FC = () => {
                 className="w-8 mb-4"
                 viewBox="0 0 24 24"
               >
-                <g fill-rule="evenodd" clip-rule="evenodd">
+                <g fillRule="evenodd" clipRule="evenodd">
                   <path
                     d="M17.03 8.97a.75.75 0 0 1 0 1.06l-4.2 4.2a.75.75 0 0 1-1.154-.114l-1.093-1.639L8.03 15.03a.75.75 0 0 1-1.06-1.06l3.2-3.2a.75.75 0 0 1 1.154.114l1.093 1.639L15.97 8.97a.75.75 0 0 1 1.06 0z"
                     data-original="#000000"

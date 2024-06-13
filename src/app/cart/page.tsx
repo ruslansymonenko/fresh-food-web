@@ -7,5 +7,9 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <Cart />;
+  return (
+    <div className="flex items-center justify-center w-full min-h-screen mb-10">
+      <Cart />
+    </div>
+  );
 }

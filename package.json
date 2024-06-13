@@ -10,16 +10,23 @@
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\""
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.45.0",
     "axios": "^1.7.2",
     "clsx": "^2.1.1",
+    "js-cookie": "^3.0.5",
     "lucide-react": "^0.383.0",
     "next": "14.2.3",
     "next-auth": "^4.24.7",
     "react": "^18",
     "react-dom": "^18",
-    "sass": "^1.77.4"
+    "react-hook-form": "^7.51.5",
+    "react-query": "^3.39.3",
+    "react-toastify": "^10.0.5",
+    "sass": "^1.77.4",
+    "sharp": "^0.33.4"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

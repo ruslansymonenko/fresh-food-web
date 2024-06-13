@@ -1,16 +1,16 @@
 'use client';
 
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import styles from './Navbar.module.scss';
 import Link from 'next/link';
 import { menu } from '@/components/ui/navbar/menu.data';
 import MenuItem from '@/components/ui/navbar/MenuItem';
 import NavbarTop from '@/components/ui/navbar/NavbarTop';
 import AppSearch from '@/components/ui/search/Search';
-import { useSession, signOut } from 'next-auth/react';
+import { CircleUserRound, ShoppingCart } from 'lucide-react';
 
 const Navbar: FC = () => {
-  const session = useSession();
+  const user = false;
 
   return (
     <header className={styles.header}>
@@ -21,7 +21,7 @@ const Navbar: FC = () => {
             <h1 className={styles.header_link}>Fresh Food</h1>
           </Link>
 
-          <nav className="hidden gap-12 lg:flex 2xl:ml-16">
+          <nav className="hidden gap-12 lg:flex 2xl:ml-16 mr-4">
             {menu.map((item) => (
               <MenuItem item={item} key={item.link}></MenuItem>
             ))}
@@ -29,13 +29,16 @@ const Navbar: FC = () => {
         </div>
         <div className="flex items-center justify-between">
           <AppSearch />
-          {session?.data ? <Link href="/profile"></Link> : ''}
-          {session?.data ? (
-            <Link href="/logout" onClick={() => signOut({ callbackUrl: '/' })}>
-              Log out
-            </Link>
+          <Link className="mx-2" href="/cart">
+            <ShoppingCart />
+          </Link>
+          {user ? <Link href="/profile"></Link> : ''}
+          {user ? (
+            <button>Log out</button>
           ) : (
-            <Link href="/api/auth">Auth</Link>
+            <Link className="mx-2" href="/auth/login">
+              <CircleUserRound />
+            </Link>
           )}
         </div>
       </div>

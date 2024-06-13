@@ -1,47 +1,19 @@
-'use client';
-
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import { IProduct } from '@/types/product.interface';
-import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
-import ProductItem from '@/components/ui/catalogue/product-item/ProductItem';
-import styles from '@/components/ui/catalogue/Catalogue.module.scss';
+import ProductCard from '@/components/ui/product-card/ProductCard';
 
-interface ICatalogueProps {
-  isFull?: boolean;
+interface ICatagoueProps {
   products: IProduct[] | null;
 }
 
-const Catalogue: FC<ICatalogueProps> = ({ isFull = true, products }) => {
-  const [latestProducts, setLatestProducts] = useState<IProduct[] | null>(null);
-
-  useEffect(() => {
-    if (products) {
-      const productsToSet: IProduct[] = isFull ? products : products.slice(0, 4);
-      setLatestProducts(productsToSet);
-    }
-  }, [products]);
-
+const Catalogue: FC<ICatagoueProps> = ({ products }) => {
   return (
-    <div className={styles.catalogue}>
-      <div className={styles.catalogue_container}>
-        <div className={styles.catalogue_top}>
-          <h2 className={styles.catalogue_text}>Our products</h2>
-          {!isFull && (
-            <Link href="/catalogue" className={styles.catalogue_link}>
-              See All
-              <span>
-                <ArrowRight />
-              </span>
-            </Link>
-          )}
-        </div>
-
-        <div className={styles.catalogue_items}>
-          {latestProducts
-            ? latestProducts.map((product) => <ProductItem product={product} key={product.id} />)
-            : 'Products not found'}
-        </div>
+    <div className="font-[sans-serif] py-4 mx-auto lg:max-w-7xl sm:max-w-full min-h-screen">
+      <h2 className="text-4xl font-extrabold text-gray-800 mb-12">Products</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {products
+          ? products.map((product) => <ProductCard product={product} key={product.id} />)
+          : 'Products was not' + ' found'}
       </div>
     </div>
   );

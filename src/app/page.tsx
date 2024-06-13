@@ -1,10 +1,10 @@
 import { Metadata } from 'next';
 import Presentation from '@/components/ui/presentation/Presentation';
-import Catalogue from '@/components/ui/catalogue/Catalogue';
-import { ProductService } from '@/services/produtc.service';
+import ProductsShowcase from '@/components/ui/product-showcase/ProductsShowcase';
+import { ProductService } from '@/services/product.service';
 import { IProduct } from '@/types/product.interface';
 import Subscribe from '@/components/ui/subscribe/Subscribe';
-import Features from '@/components/ui/shop-features/Features';
+import Features from '@/components/ui/shop-features/ShopFeatures';
 import About from '@/components/ui/about/About';
 
 export const metadata: Metadata = {
@@ -22,7 +22,7 @@ export default async function Home() {
   return (
     <div className="bg-white pb-6 sm:pb-8 lg:pb-12">
       <Presentation />
-      <Catalogue products={data} isFull={false} />
+      <ProductsShowcase products={data} />
       <Features />
       <About />
       <Subscribe />
