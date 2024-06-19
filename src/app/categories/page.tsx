@@ -9,7 +9,8 @@ export const metadata: Metadata = {
 };
 
 async function getCategories(): Promise<ICategory[] | null> {
-  return await CategoryService.getAll();
+  const serviceResponse = await CategoryService.getAll();
+  return serviceResponse.data;
 }
 
 export default async function CategoriesPage() {

@@ -1,27 +1,94 @@
-import { IProduct } from '@/types/product.interface';
+import { IProduct, IProductsServerResponse } from '@/types/product.interface';
 import { axiosClassic } from '@/api/interceptors';
+import { IServiceResponse } from '@/types/service.intrfecace';
 
 interface IProductService {
-  getAll(): Promise<IProduct[] | null>;
+  sendStatus<T>(status: boolean, message: string, data: T): IServiceResponse<T>;
+  getAll(): Promise<IServiceResponse<IProduct[] | null>>;
+  getByCategory(categoryId: string): Promise<IServiceResponse<IProduct | null>>;
+  getBySlug(productSlug: string): Promise<IServiceResponse<IProduct | null>>;
+  getSimilar(productId: string): Promise<IServiceResponse<IProduct | null>>;
 }
 
-export enum ProductsRoutes {
+export enum ProductRoutes {
   GET_ALL = '/products/all',
+  GET_BY_CATEGORY = '/products/by-category',
+  GET_BY_SLUG = '/products/by-slug',
+  GET_SIMILAR = '/products/get-similar',
 }
 
 export class ProductService implements IProductService {
-  async getAll(): Promise<IProduct[] | null> {
+  sendStatus<T>(status: boolean, message: string, data: T): IServiceResponse<T> {
+    return {
+      status: status,
+      message: message,
+      data: data,
+    };
+  }
+
+  public async getAll(): Promise<IServiceResponse<IProduct[] | null>> {
     try {
-      const { data } = await axiosClassic.get(ProductsRoutes.GET_ALL);
+      const { data } = await axiosClassic.get<IProductsServerResponse>(ProductRoutes.GET_ALL);
 
       if (data.products) {
-        return data.products;
+        return this.sendStatus<IProduct[]>(true, 'Products received', data.products);
+      } else {
+        return this.sendStatus<null>(true, 'Products not received', null);
       }
-
-      return null;
     } catch (error) {
       console.log(error);
-      return null;
+      return this.sendStatus<null>(true, 'Products not received', null);
+    }
+  }
+
+  public async getByCategory(categoryId: string): Promise<IServiceResponse<IProduct | null>> {
+    try {
+      const { data } = await axiosClassic.get<IProduct>(
+        `${ProductRoutes.GET_BY_CATEGORY}/${categoryId}`,
+      );
+
+      if (data) {
+        return this.sendStatus<IProduct>(true, 'Products received', data);
+      } else {
+        return this.sendStatus<null>(true, 'Products received', null);
+      }
+    } catch (error) {
+      console.log(error);
+      return this.sendStatus<null>(true, 'Products not received', null);
+    }
+  }
+
+  public async getBySlug(productSlug: string): Promise<IServiceResponse<IProduct | null>> {
+    try {
+      const { data } = await axiosClassic.get<IProduct>(
+        `${ProductRoutes.GET_BY_SLUG}/${productSlug}`,
+      );
+
+      if (data) {
+        return this.sendStatus<IProduct>(true, 'Products received', data);
+      } else {
+        return this.sendStatus<null>(true, 'Products received', null);
+      }
+    } catch (error) {
+      console.log(error);
+      return this.sendStatus<null>(true, 'Products not received', null);
+    }
+  }
+
+  public async getSimilar(productId: string): Promise<IServiceResponse<IProduct | null>> {
+    try {
+      const { data } = await axiosClassic.get<IProduct>(
+        `${ProductRoutes.GET_SIMILAR}/${productId}`,
+      );
+
+      if (data) {
+        return this.sendStatus<IProduct>(true, 'Products received', data);
+      } else {
+        return this.sendStatus<null>(true, 'Products received', null);
+      }
+    } catch (error) {
+      console.log(error);
+      return this.sendStatus<null>(true, 'Products not received', null);
     }
   }
 }

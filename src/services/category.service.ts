@@ -12,6 +12,7 @@ interface ICategoryService {
 export enum CategoryRoutes {
   GET_ALL = '/categories/get-all',
   GET_BY_ID = '/categories/by-id',
+  GET_BY_SLUG = '/categories/by-slug',
 }
 
 export class CategoryService implements ICategoryService {
@@ -29,6 +30,40 @@ export class CategoryService implements ICategoryService {
 
       if (data) {
         return this.sendStatus<ICategory[]>(true, 'Categories received', data);
+      } else {
+        return this.sendStatus<null>(true, 'Categories received', null);
+      }
+    } catch (error) {
+      console.log(error);
+      return this.sendStatus<null>(true, 'Categories not received', null);
+    }
+  }
+
+  public async getById(categoryId: string): Promise<IServiceResponse<ICategory | null>> {
+    try {
+      const { data } = await axiosClassic.get<ICategory>(
+        `${CategoryRoutes.GET_BY_ID}/${categoryId}`,
+      );
+
+      if (data) {
+        return this.sendStatus<ICategory>(true, 'Categories received', data);
+      } else {
+        return this.sendStatus<null>(true, 'Categories received', null);
+      }
+    } catch (error) {
+      console.log(error);
+      return this.sendStatus<null>(true, 'Categories not received', null);
+    }
+  }
+
+  public async getBySlug(categorySlug: string): Promise<IServiceResponse<ICategory | null>> {
+    try {
+      const { data } = await axiosClassic.get<ICategory>(
+        `${CategoryRoutes.GET_BY_SLUG}/${categorySlug}`,
+      );
+
+      if (data) {
+        return this.sendStatus<ICategory>(true, 'Categories received', data);
       } else {
         return this.sendStatus<null>(true, 'Categories received', null);
       }

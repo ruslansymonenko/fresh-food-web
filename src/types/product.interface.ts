@@ -10,3 +10,8 @@ export interface IProduct {
   price: number;
   category: ICategory;
 }
+
+export interface IProductsServerResponse {
+  products: IProduct[];
+  length: number;
+}

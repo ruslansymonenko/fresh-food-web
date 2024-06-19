@@ -1,7 +1,8 @@
 import { Metadata } from 'next';
 import { IProduct } from '@/types/product.interface';
-import { ProductService } from '@/services/product.service';
+import ProductService from '@/services/product.service';
 import Catalogue from '@/components/ui/catalogue/Catalogue';
+import { IServiceResponse } from '@/types/service.intrfecace';
 
 export const metadata: Metadata = {
   title: 'Catalogue',
@@ -9,8 +10,8 @@ export const metadata: Metadata = {
 };
 
 async function getProducts(): Promise<IProduct[] | null> {
-  const productService = new ProductService();
-  return await productService.getAll();
+  const serviceResponse: IServiceResponse<IProduct[] | null> = await ProductService.getAll();
+  return serviceResponse.data;
 }
 
 export default async function CataloguePage() {

@@ -6,14 +6,16 @@ import { IProduct } from '@/types/product.interface';
 import Subscribe from '@/components/ui/subscribe/Subscribe';
 import Features from '@/components/ui/shop-features/ShopFeatures';
 import About from '@/components/ui/about/About';
+import { IServiceResponse } from '@/types/service.intrfecace';
 
 export const metadata: Metadata = {
   title: 'Home Page',
-  description: 'Home Page description',
+  description: 'Fresh Food Home Page',
 };
 
 async function getProducts(): Promise<IProduct[] | null> {
-  return await ProductService.getAll();
+  const serviceResponse: IServiceResponse<IProduct[] | null> = await ProductService.getAll();
+  return serviceResponse.data;
 }
 
 export default async function Home() {
