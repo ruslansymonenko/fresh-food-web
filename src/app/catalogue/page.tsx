@@ -9,7 +9,8 @@ export const metadata: Metadata = {
 };
 
 async function getProducts(): Promise<IProduct[] | null> {
-  return await ProductService.getAll();
+  const productService = new ProductService();
+  return await productService.getAll();
 }
 
 export default async function CataloguePage() {

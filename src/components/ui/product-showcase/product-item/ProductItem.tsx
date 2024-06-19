@@ -1,9 +1,7 @@
 import { FC } from 'react';
 import { IProduct } from '@/types/product.interface';
 import Image from 'next/image';
-import Link from 'next/link';
 import { convertPrice } from '@/utils/convertPrice';
-import { API_PATHS } from '@/consts/apiPaths';
 
 import styles from './ProductItem.module.scss';
 
@@ -33,7 +31,7 @@ const ProductItem: FC<IProductItemProps> = ({ product }) => {
 
       <div className="w-5/6 h-[260px] p-4 overflow-hidden mx-auto aspect-w-16 aspect-h-8">
         <Image
-          src={`${API_PATHS.SERVER}${product.image}`}
+          src={`${product.images[0]}`}
           alt={product.name}
           width={640}
           height={360}

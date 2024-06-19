@@ -1,6 +1,5 @@
 import { FC } from 'react';
 import Image from 'next/image';
-import { API_PATHS } from '@/consts/apiPaths';
 import { IProduct } from '@/types/product.interface';
 import { convertPrice } from '@/utils/convertPrice';
 
@@ -38,7 +37,7 @@ const ProductCard: FC<IProductCardProps> = ({ product }) => {
 
       <div className="w-5/6 h-[260px] p-4 overflow-hidden mx-auto aspect-w-16 aspect-h-8">
         <Image
-          src={`${API_PATHS.SERVER}${product.image}`}
+          src={`${product.images[0]}`}
           alt={product.name}
           width={640}
           height={360}

@@ -1,23 +1,29 @@
-import axios from 'axios';
 import { IProduct } from '@/types/product.interface';
-import { API_PATHS } from '@/consts/apiPaths';
+import { axiosClassic } from '@/api/interceptors';
 
 interface IProductService {
   getAll(): Promise<IProduct[] | null>;
 }
 
-export const ProductService: IProductService = {
+export enum ProductsRoutes {
+  GET_ALL = '/products/all',
+}
+
+export class ProductService implements IProductService {
   async getAll(): Promise<IProduct[] | null> {
     try {
-      const { data } = await axios<IProduct[]>({
-        url: API_PATHS.PRODUCTS_GET_ALL,
-        method: 'GET',
-      });
+      const { data } = await axiosClassic.get(ProductsRoutes.GET_ALL);
 
-      return data;
+      if (data.products) {
+        return data.products;
+      }
+
+      return null;
     } catch (error) {
       console.log(error);
       return null;
     }
-  },
-};
+  }
+}
+
+export default new ProductService();

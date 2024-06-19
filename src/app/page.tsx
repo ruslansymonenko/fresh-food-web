@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import Presentation from '@/components/ui/presentation/Presentation';
 import ProductsShowcase from '@/components/ui/product-showcase/ProductsShowcase';
-import { ProductService } from '@/services/product.service';
+import ProductService from '@/services/product.service';
 import { IProduct } from '@/types/product.interface';
 import Subscribe from '@/components/ui/subscribe/Subscribe';
 import Features from '@/components/ui/shop-features/ShopFeatures';

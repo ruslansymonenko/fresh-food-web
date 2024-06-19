@@ -4,13 +4,13 @@ import { EnumTokens } from '@/types/auth.interface';
 
 export interface IAuthTokenService {
   getAccessToken(): string | null;
-  saveTokenStorage(accessToken: string): void;
+  saveTokenStorage(accessToken: string, refreshToken: string): void;
   removeTokenStorage(): void;
 }
 
 export class AuthTokenService implements IAuthTokenService {
   getAccessToken = (): string | null => {
-    const accessToken = Cookies.get(EnumTokens.ACCESS_TOKEN);
+    const accessToken: string | undefined = Cookies.get(EnumTokens.ACCESS_TOKEN);
     return accessToken || null;
   };
 
@@ -24,5 +24,8 @@ export class AuthTokenService implements IAuthTokenService {
 
   removeTokenStorage = (): void => {
     Cookies.remove(EnumTokens.ACCESS_TOKEN);
+    Cookies.remove(EnumTokens.REFRESH_TOKEN);
   };
 }
+
+export default new AuthTokenService();

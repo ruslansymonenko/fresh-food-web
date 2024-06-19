@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import styles from './Navbar.module.scss';
 import Link from 'next/link';
 import { menu } from '@/components/ui/navbar/menu.data';
@@ -8,9 +8,21 @@ import MenuItem from '@/components/ui/navbar/MenuItem';
 import NavbarTop from '@/components/ui/navbar/NavbarTop';
 import AppSearch from '@/components/ui/search/Search';
 import { CircleUserRound, ShoppingCart } from 'lucide-react';
+import { toast } from 'react-toastify';
+import { IUserAuthServerData } from '@/types/auth.interface';
+import AuthService from '@/services/auth.service';
+
+interface INavbarProps {
+  user: IUserAuthServerData | null;
+}
 
 const Navbar: FC = () => {
-  const user = false;
+  const [user, setUser] = useState<IUserAuthServerData | null>(AuthService.getUserFromStorage());
+
+  const handleLogOut = async () => {
+    const logoutStatus = await AuthService.logout();
+    toast.info(logoutStatus.message);
+  };
 
   return (
     <header className={styles.header}>
@@ -34,7 +46,7 @@ const Navbar: FC = () => {
           </Link>
           {user ? <Link href="/profile"></Link> : ''}
           {user ? (
-            <button>Log out</button>
+            <button onClick={handleLogOut}>Log out</button>
           ) : (
             <Link className="mx-2" href="/auth/login">
               <CircleUserRound />

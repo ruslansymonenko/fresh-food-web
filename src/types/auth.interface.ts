@@ -12,10 +12,6 @@ export interface IUserAuthServerData extends ITokens {
   user: UserAuthResponseData;
 }
 
-export interface IGetTokensData {
-  refreshToken: string;
-}
-
 export enum EnumTokens {
   ACCESS_TOKEN = 'accessToken',
   REFRESH_TOKEN = 'refreshToken',

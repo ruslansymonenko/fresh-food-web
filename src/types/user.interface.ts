@@ -1,8 +1,8 @@
 export interface IUser {
   id: string;
   email: string;
-  name: string;
   password: string;
-  avatar: string;
-  favorites: any;
+  name: string;
+  phone: string;
+  favorites: any; //need to add type here
 }

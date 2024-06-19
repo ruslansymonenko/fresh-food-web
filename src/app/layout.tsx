@@ -8,6 +8,7 @@ import Footer from '@/components/ui/footer/Footer';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { SITE_NAME } from '@/consts/webSite';
+import Head from 'next/head';
 
 const font = Golos_Text({ subsets: ['latin'] });
 
@@ -26,6 +27,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Head>
+        <link rel="shortcut icon" href="/website-logo.svg" />
+      </Head>
       <body className={font.className} suppressHydrationWarning={true}>
         <Providers>
           <Navbar />

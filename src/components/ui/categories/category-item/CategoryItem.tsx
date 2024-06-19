@@ -15,12 +15,7 @@ const CategoryItem: FC<ICategoryItemProps> = ({ category }) => {
       className="bg-white shadow-md overflow-hidden rounded-lg cursor-pointer hover:-translate-y-2 transition-all relative"
     >
       <div className="w-5/6 h-[260px] p-4 overflow-hidden mx-auto aspect-w-16 aspect-h-8">
-        <Image
-          src={`${API_PATHS.SERVER}${category.image}`}
-          alt={category.name}
-          width={640}
-          height={360}
-        />
+        <Image src={`${category.image}`} alt={category.name} width={640} height={360} />
       </div>
 
       <div className="p-6 bg-white">

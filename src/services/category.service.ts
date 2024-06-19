@@ -1,23 +1,42 @@
-import axios from 'axios';
-import { API_PATHS } from '@/consts/apiPaths';
 import { ICategory } from '@/types/category.interface';
+import { axiosClassic } from '@/api/interceptors';
+import { IServiceResponse } from '@/types/service.intrfecace';
 
 interface ICategoryService {
-  getAll(): Promise<ICategory[] | null>;
+  sendStatus<T>(status: boolean, message: string, data: T): IServiceResponse<T>;
+  getAll(): Promise<IServiceResponse<ICategory[] | null>>;
+  getById(categoryId: string): Promise<IServiceResponse<ICategory | null>>;
+  getBySlug(categorySlug: string): Promise<IServiceResponse<ICategory | null>>;
 }
 
-export const CategoryService: ICategoryService = {
-  async getAll(): Promise<ICategory[] | null> {
-    try {
-      const { data } = await axios<ICategory[]>({
-        url: API_PATHS.CATEGORIES_GET_ALL,
-        method: 'GET',
-      });
+export enum CategoryRoutes {
+  GET_ALL = '/categories/get-all',
+  GET_BY_ID = '/categories/by-id',
+}
 
-      return data;
+export class CategoryService implements ICategoryService {
+  sendStatus<T>(status: boolean, message: string, data: T): IServiceResponse<T> {
+    return {
+      status: status,
+      message: message,
+      data: data,
+    };
+  }
+
+  public async getAll(): Promise<IServiceResponse<ICategory[] | null>> {
+    try {
+      const { data } = await axiosClassic.get<ICategory[]>(CategoryRoutes.GET_ALL);
+
+      if (data) {
+        return this.sendStatus<ICategory[]>(true, 'Categories received', data);
+      } else {
+        return this.sendStatus<null>(true, 'Categories received', null);
+      }
     } catch (error) {
       console.log(error);
-      return null;
+      return this.sendStatus<null>(true, 'Categories not received', null);
     }
-  },
-};
+  }
+}
+
+export default new CategoryService();
