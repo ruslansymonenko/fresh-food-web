@@ -1,10 +1,11 @@
-import { IProduct, IProductsServerResponse } from '@/types/product.interface';
+import { IProduct, IProductsServerResponse, TypeDataFilters } from '@/types/product.interface';
 import { axiosClassic } from '@/api/interceptors';
 import { IServiceResponse } from '@/types/service.intrfecace';
 
 interface IProductService {
   sendStatus<T>(status: boolean, message: string, data: T): IServiceResponse<T>;
-  getAll(): Promise<IServiceResponse<IProduct[] | null>>;
+  getAll(queryData?: TypeDataFilters): Promise<IServiceResponse<IProduct[] | null>>;
+  getById(productSlug: string): Promise<IServiceResponse<IProduct | null>>;
   getByCategory(categoryId: string): Promise<IServiceResponse<IProduct | null>>;
   getBySlug(productSlug: string): Promise<IServiceResponse<IProduct | null>>;
   getSimilar(productId: string): Promise<IServiceResponse<IProduct | null>>;
@@ -13,6 +14,7 @@ interface IProductService {
 export enum ProductRoutes {
   GET_ALL = '/products/all',
   GET_BY_CATEGORY = '/products/by-category',
+  GET_BY_ID = '/products/by-id',
   GET_BY_SLUG = '/products/by-slug',
   GET_SIMILAR = '/products/get-similar',
 }
@@ -26,14 +28,31 @@ export class ProductService implements IProductService {
     };
   }
 
-  public async getAll(): Promise<IServiceResponse<IProduct[] | null>> {
+  public async getAll(queryData?: TypeDataFilters): Promise<IServiceResponse<IProduct[] | null>> {
     try {
-      const { data } = await axiosClassic.get<IProductsServerResponse>(ProductRoutes.GET_ALL);
+      const { data } = await axiosClassic.get<IProductsServerResponse>(ProductRoutes.GET_ALL, {
+        params: queryData,
+      });
 
       if (data.products) {
         return this.sendStatus<IProduct[]>(true, 'Products received', data.products);
       } else {
         return this.sendStatus<null>(true, 'Products not received', null);
+      }
+    } catch (error) {
+      console.log(error);
+      return this.sendStatus<null>(true, 'Products not received', null);
+    }
+  }
+
+  public async getById(productId: string): Promise<IServiceResponse<IProduct | null>> {
+    try {
+      const { data } = await axiosClassic.get<IProduct>(`${ProductRoutes.GET_BY_ID}/${productId}`);
+
+      if (data) {
+        return this.sendStatus<IProduct>(true, 'Products received', data);
+      } else {
+        return this.sendStatus<null>(true, 'Products received', null);
       }
     } catch (error) {
       console.log(error);

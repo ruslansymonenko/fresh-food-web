@@ -7,7 +7,7 @@ interface IAuthService {
   sendStatus<T>(status: boolean, message: string, data: T): IServiceResponse<T>;
   login(data: IAuthFormData): Promise<IServiceResponse<IUserAuthServerData | null>>;
   register(data: IAuthFormData): Promise<IServiceResponse<IUserAuthServerData | null>>;
-  getToken(): Promise<IUserAuthServerData | null>;
+  getToken(): Promise<IServiceResponse<IUserAuthServerData | null>>;
   getUserFromStorage(): IUserAuthServerData | null;
   removeUserFromStorage(): void;
   saveToStorage(data: IUserAuthServerData): void;
@@ -77,19 +77,19 @@ export class AuthService implements IAuthService {
     }
   }
 
-  async getToken(): Promise<IUserAuthServerData | null> {
+  async getToken(): Promise<IServiceResponse<IUserAuthServerData | null>> {
     try {
       const response = await axiosClassic.post<IUserAuthServerData>(AuthRoutes.GET_TOKEN);
 
       if (response.data.accessToken) {
         this.saveToStorage(response.data);
-        return response.data;
+        return this.sendStatus<IUserAuthServerData>(true, 'Success', response.data);
       } else {
-        return null;
+        return this.sendStatus<null>(true, 'Authorization error', null);
       }
     } catch (error) {
       console.log(error);
-      return null;
+      return this.sendStatus<null>(true, 'Authorization error', null);
     }
   }
 

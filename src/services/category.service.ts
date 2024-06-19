@@ -31,7 +31,7 @@ export class CategoryService implements ICategoryService {
       if (data) {
         return this.sendStatus<ICategory[]>(true, 'Categories received', data);
       } else {
-        return this.sendStatus<null>(true, 'Categories received', null);
+        return this.sendStatus<null>(true, 'Categories not received', null);
       }
     } catch (error) {
       console.log(error);
@@ -48,7 +48,7 @@ export class CategoryService implements ICategoryService {
       if (data) {
         return this.sendStatus<ICategory>(true, 'Categories received', data);
       } else {
-        return this.sendStatus<null>(true, 'Categories received', null);
+        return this.sendStatus<null>(true, 'Categories not received', null);
       }
     } catch (error) {
       console.log(error);
@@ -65,7 +65,7 @@ export class CategoryService implements ICategoryService {
       if (data) {
         return this.sendStatus<ICategory>(true, 'Categories received', data);
       } else {
-        return this.sendStatus<null>(true, 'Categories received', null);
+        return this.sendStatus<null>(true, 'Categories not received', null);
       }
     } catch (error) {
       console.log(error);
