@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import Info from '@/components/ui/info/Info';
+import Info from '@/screens/info/Info';
 
 export const metadata: Metadata = {
   title: 'Fresh Food Info',

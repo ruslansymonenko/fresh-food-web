@@ -1,14 +1,10 @@
 import { Metadata } from 'next';
-import RegisterForm from '@/components/ui/forms/auth/register-form/RegisterForm';
+import Register from '@/screens/register/Register';
 
 export const metadata: Metadata = {
   title: 'Register',
 };
 
 export default function Page() {
-  return (
-    <div>
-      <RegisterForm />
-    </div>
-  );
+  return <Register />;
 }

@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import CategoryItem from '@/components/ui/categories/category-item/CategoryItem';
+import CategoryItem from '@/components/ui/category-item/CategoryItem';
 import { ICategory } from '@/types/category.interface';
 
 interface ICategoriesProps {

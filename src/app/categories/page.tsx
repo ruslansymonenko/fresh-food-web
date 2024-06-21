@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import Categories from '@/components/ui/categories/Categories';
+import Categories from '@/screens/categories/Categories';
 import CategoryService from '@/services/category.service';
 import { ICategory } from '@/types/category.interface';
 

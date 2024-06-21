@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { IProduct } from '@/types/product.interface';
 import ProductService from '@/services/product.service';
-import Catalogue from '@/components/ui/catalogue/Catalogue';
+import Catalogue from '@/screens/catalogue/Catalogue';
 import { IServiceResponse } from '@/types/service.intrfecace';
 
 export const metadata: Metadata = {

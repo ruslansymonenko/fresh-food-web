@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import ContactForm from '@/components/ui/forms/contact/ContactForm';
+import Contacts from '@/screens/contacts/Contacts';
 
 export const metadata: Metadata = {
   title: 'Fresh Food Contact',
@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  return <ContactForm />;
+  return <Contacts />;
 }

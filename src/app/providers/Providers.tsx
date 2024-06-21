@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, ReactNode, useState } from 'react';
+import { FC, PropsWithChildren, ReactNode, useState } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -11,7 +11,7 @@ interface IProvidersProps {
   children: ReactNode;
 }
 
-export const Providers: FC<IProvidersProps> = ({ children }) => {
+export const Providers: FC<PropsWithChildren> = ({ children }) => {
   const [client] = useState(
     new QueryClient({
       defaultOptions: {

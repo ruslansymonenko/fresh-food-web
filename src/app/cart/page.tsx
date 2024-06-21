@@ -1,4 +1,4 @@
-import Cart from '@/components/ui/cart/Cart';
+import Cart from '@/screens/cart/Cart';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
