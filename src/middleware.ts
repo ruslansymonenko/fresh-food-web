@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { CLIENT_PATH } from '@/consts/apiPaths';
 import { EnumTokens } from '@/types/auth.interface';
 
 export function middleware(request: NextRequest, response: NextResponse) {

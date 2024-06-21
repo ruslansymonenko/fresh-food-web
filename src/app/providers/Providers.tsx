@@ -3,9 +3,9 @@
 import { FC, PropsWithChildren, ReactNode, useState } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import { PersistGate } from 'redux-persist/integration/react';
-import { persistor, store } from '@/store/store';
 import { Provider } from 'react-redux';
+import { store, persistor } from '@/store/store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 interface IProvidersProps {
   children: ReactNode;

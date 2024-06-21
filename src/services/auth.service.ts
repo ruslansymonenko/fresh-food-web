@@ -94,7 +94,11 @@ export class AuthService implements IAuthService {
   }
 
   getUserFromStorage() {
-    const currentUser: string | null = localStorage.getItem('user');
+    let currentUser: string | null = null;
+
+    if (typeof window !== 'undefined') {
+      currentUser = window.localStorage.getItem('user');
+    }
 
     if (currentUser) {
       return JSON.parse(currentUser);

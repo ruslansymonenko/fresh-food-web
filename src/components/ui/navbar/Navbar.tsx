@@ -24,6 +24,10 @@ const Navbar: FC = () => {
     toast.info(logoutStatus.message);
   };
 
+  useEffect(() => {
+    console.log(localStorage.getItem('user'));
+  }, []);
+
   return (
     <header className={styles.header}>
       <NavbarTop />
