@@ -11,22 +11,23 @@ import { CircleUserRound, ShoppingCart } from 'lucide-react';
 import { toast } from 'react-toastify';
 import { IUserAuthServerData } from '@/types/auth.interface';
 import AuthService from '@/services/auth.service';
+import { useSession } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
 
 interface INavbarProps {
   user: IUserAuthServerData | null;
 }
 
 const Navbar: FC = () => {
-  const [user, setUser] = useState<IUserAuthServerData | null>(AuthService.getUserFromStorage());
+  const user = false;
+  const session = useSession();
+
+  console.log(session);
 
   const handleLogOut = async () => {
     const logoutStatus = await AuthService.logout();
     toast.info(logoutStatus.message);
   };
-
-  useEffect(() => {
-    console.log(localStorage.getItem('user'));
-  }, []);
 
   return (
     <header className={styles.header}>
@@ -48,11 +49,12 @@ const Navbar: FC = () => {
           <Link className="mx-2" href="/cart">
             <ShoppingCart />
           </Link>
+          <button onClick={() => signOut()}>Log Out</button>
           {user ? <Link href="/profile"></Link> : ''}
           {user ? (
             <button onClick={handleLogOut}>Log out</button>
           ) : (
-            <Link className="mx-2" href="/auth/login">
+            <Link className="mx-2" href="/api/auth/signin">
               <CircleUserRound />
             </Link>
           )}

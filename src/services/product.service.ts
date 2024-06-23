@@ -1,5 +1,5 @@
 import { IProduct, IProductsServerResponse, TypeDataFilters } from '@/types/product.interface';
-import { axiosClassic } from '@/api/interceptors';
+import { axiosClassic } from '@/utils/api/interceptors';
 import { IServiceResponse } from '@/types/service.intrfecace';
 
 interface IProductService {

@@ -30,7 +30,7 @@ export default function RootLayout({
       <Head>
         <link rel="shortcut icon" href="/website-logo.svg" />
       </Head>
-      <body className={font.className} suppressHydrationWarning={true}>
+      <body className={font.className}>
         <Providers>
           <Navbar />
           {children}

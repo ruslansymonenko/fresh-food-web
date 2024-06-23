@@ -1,5 +1,5 @@
 import { IAuthFormData, IUserAuthServerData } from '@/types/auth.interface';
-import { axiosClassic, axiosWithAuth } from '@/api/interceptors';
+import { axiosClassic, axiosWithAuth } from '@/utils/api/interceptors';
 import { AuthTokenService } from '@/services/auth-token.service';
 import { IServiceResponse } from '@/types/service.intrfecace';
 
@@ -42,10 +42,6 @@ export class AuthService implements IAuthService {
         email: data.email,
         password: data.password,
       });
-
-      if (response.data.accessToken) {
-        this.saveToStorage(response.data);
-      }
 
       if (response.data) {
         return this.sendStatus<IUserAuthServerData>(true, 'Successfully login', response.data);
@@ -109,11 +105,10 @@ export class AuthService implements IAuthService {
 
   saveToStorage(data: IUserAuthServerData) {
     this.authTokenService.saveTokenStorage(data.accessToken);
-    localStorage.setItem('user', JSON.stringify(data.user));
   }
 
   removeUserFromStorage() {
-    localStorage.removeItem('user');
+    // localStorage.removeItem('user');
   }
 
   async logout() {
@@ -121,7 +116,6 @@ export class AuthService implements IAuthService {
       const response = await axiosWithAuth.post(AuthRoutes.LOGOUT);
 
       this.authTokenService.removeTokenStorage();
-      this.removeUserFromStorage();
 
       if (response.data) {
         return this.sendStatus<null>(true, 'Successfully logged out', null);
