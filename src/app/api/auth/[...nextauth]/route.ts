@@ -38,6 +38,10 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+  pages: {
+    signIn: '/auth/login',
+    signOut: '/',
+  },
   callbacks: {
     async jwt({ token, user }) {
       if (user) return { ...token, ...user };
@@ -46,9 +50,7 @@ export const authOptions: NextAuthOptions = {
     },
 
     async session({ token, session }) {
-      console.log('token user:', token);
-      const user = token.user;
-      console.log(token.id, token.email);
+      // const user = token.user;
       // @ts-ignore
       session.user = { id: token.id, email: token.email };
       session.accessToken = token.accessToken;

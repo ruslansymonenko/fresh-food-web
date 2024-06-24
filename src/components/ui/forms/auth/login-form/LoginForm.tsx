@@ -11,7 +11,6 @@ import Field from '@/components/ui/field/Field';
 import { emailRegex } from '@/components/ui/forms/auth/email.regex';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
-import { AuthService } from '@/services/auth.service';
 import { signIn } from 'next-auth/react';
 
 const LoginForm: FC = ({}) => {
@@ -20,13 +19,11 @@ const LoginForm: FC = ({}) => {
   });
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
-  // const authService = new AuthService();
 
   const onSubmit: SubmitHandler<IAuthFormData> = async (data) => {
     setIsLoading(true);
 
     try {
-      // const responseStatus = await authService.login(data);
       const authResult = await signIn('credentials', {
         email: data.email,
         password: data.password,
@@ -55,7 +52,7 @@ const LoginForm: FC = ({}) => {
           <p className="text-sm mt-10">
             Do not have an account{' '}
             <Link href="/auth/register" className={styles.text_link}>
-              Login here
+              Register here
             </Link>
           </p>
         </div>
@@ -88,9 +85,10 @@ const LoginForm: FC = ({}) => {
               placeholder="Enter password"
               type="password"
             />
-            <div className="mt-12">
-              <Link href={'/api/auth/signin'}>Login</Link>
-            </div>
+            <Button onClick={handleSubmit(onSubmit)}>Login</Button>
+            {/*<div className="mt-12">*/}
+            {/*  <Link href={'/api/auth/signin'}>Login</Link>*/}
+            {/*</div>*/}
           </form>
         )}
       </div>

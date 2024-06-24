@@ -25,13 +25,14 @@ export const Providers: FC<PropsWithChildren> = ({ children }) => {
 
   return (
     <>
-      <SessionProvider>{children}</SessionProvider>
-      {/*<QueryClientProvider client={client}>*/}
+      <QueryClientProvider client={client}>
+        <SessionProvider>{children}</SessionProvider>
+      </QueryClientProvider>
+
       {/*  <Provider store={store}>*/}
       {/*    <PersistGate persistor={persistor}></PersistGate>*/}
       {/*  </Provider>*/}
       {/*  <ReactQueryDevtools initialIsOpen={false} />*/}
-      {/*</QueryClientProvider>*/}
     </>
   );
 };

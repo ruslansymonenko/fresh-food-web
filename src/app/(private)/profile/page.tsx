@@ -1,3 +1,9 @@
+import Profile from '@/screens/profile/Profile';
+
 export default function ProfilePage() {
-  return <div>profile</div>;
+  return (
+    <div className="min-h-screen">
+      <Profile />
+    </div>
+  );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import Link from 'next/link';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { IAuthFormData } from '@/types/auth.interface';
@@ -8,19 +8,48 @@ import Loader from '@/components/ui/loader/Loader';
 import Field from '@/components/ui/field/Field';
 import { emailRegex } from '@/components/ui/forms/auth/email.regex';
 import Button from '@/components/ui/button/Button';
-
+import AuthService from '@/services/auth.service';
 import styles from './RegisterForm.module.scss';
+import { useRouter } from 'next/navigation';
+import { signIn } from 'next-auth/react';
+import { toast } from 'react-toastify';
 
 const RegisterForm: FC = () => {
   const { handleSubmit, reset, control } = useForm<IAuthFormData>({
     mode: 'onChange',
   });
 
-  const onSubmit: SubmitHandler<IAuthFormData> = (data) => {
-    console.log(data);
-  };
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const router = useRouter();
 
-  const isLoading = false;
+  const onSubmit: SubmitHandler<IAuthFormData> = async (data) => {
+    setIsLoading(true);
+
+    try {
+      const serviceResponse = await AuthService.register(data);
+
+      if (serviceResponse.status) {
+        const authResult = await signIn('credentials', {
+          email: data.email,
+          password: data.password,
+          callbackUrl: '/',
+          redirect: false,
+        });
+        if (authResult && authResult.ok) {
+          reset();
+          router.push('/');
+        } else {
+          toast.error('Authorization error');
+        }
+      } else {
+        toast.error('Registration error');
+      }
+    } catch (error) {
+      toast.error('Registration error, please, try later');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className={styles.form}>
@@ -65,7 +94,7 @@ const RegisterForm: FC = () => {
               type="password"
             />
             <div className="mt-12">
-              <Button onClick={handleSubmit(onSubmit)}>Login</Button>
+              <Button onClick={handleSubmit(onSubmit)}>Register</Button>
             </div>
           </form>
         )}
