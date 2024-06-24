@@ -1,7 +1,6 @@
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { AuthService } from '@/services/auth.service';
-import { UserAuthResponseData } from '@/types/auth.interface';
 
 const authService = new AuthService();
 

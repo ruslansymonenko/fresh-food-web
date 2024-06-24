@@ -7,7 +7,7 @@ import { menu } from '@/components/ui/navbar/menu.data';
 import MenuItem from '@/components/ui/navbar/MenuItem';
 import NavbarTop from '@/components/ui/navbar/NavbarTop';
 import AppSearch from '@/components/ui/search/Search';
-import { CircleUserRound, ShoppingCart } from 'lucide-react';
+import { CircleUserRound, ShoppingCart, LogOut } from 'lucide-react';
 import { toast } from 'react-toastify';
 import { IUserAuthServerData } from '@/types/auth.interface';
 import AuthService from '@/services/auth.service';
@@ -25,8 +25,8 @@ const Navbar: FC = () => {
   console.log(session);
 
   const handleLogOut = async () => {
-    const logoutStatus = await AuthService.logout();
-    toast.info(logoutStatus.message);
+    // const logoutStatus = await AuthService.logout();
+    await signOut();
   };
 
   return (
@@ -46,13 +46,13 @@ const Navbar: FC = () => {
         </div>
         <div className="flex items-center justify-between">
           <AppSearch />
-          <Link className="mx-2" href="/cart">
+          <Link className="mx-4" href="/cart">
             <ShoppingCart />
           </Link>
-          <button onClick={() => signOut()}>Log Out</button>
-          {user ? <Link href="/profile"></Link> : ''}
-          {user ? (
-            <button onClick={handleLogOut}>Log out</button>
+          {session.data ? (
+            <button onClick={handleLogOut}>
+              <LogOut />
+            </button>
           ) : (
             <Link className="mx-2" href="/api/auth/signin">
               <CircleUserRound />
