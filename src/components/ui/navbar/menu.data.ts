@@ -1,4 +1,4 @@
-import { IMenuItem } from '@/components/ui/navbar/nemu.interface';
+import { IMenuItem } from '@/components/ui/navbar/menu.interface';
 
 export const menu: IMenuItem[] = [
   {

@@ -1,5 +1,5 @@
 import { IStatistics } from '@/types/statistics.interface';
-import { axiosWithAuth } from '@/api/interceptors';
+import { axiosWithAuth } from '@/utils/api/interceptors';
 import { IServiceResponse } from '@/types/service.intrfecace';
 
 interface IStatisticsService {

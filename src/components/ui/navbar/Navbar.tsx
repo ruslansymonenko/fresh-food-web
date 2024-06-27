@@ -1,27 +1,32 @@
 'use client';
 
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import styles from './Navbar.module.scss';
 import Link from 'next/link';
 import { menu } from '@/components/ui/navbar/menu.data';
 import MenuItem from '@/components/ui/navbar/MenuItem';
-import NavbarTop from '@/components/ui/navbar/NavbarTop';
+import NavbarTop from '@/components/ui/navbar/navbar-top/NavbarTop';
 import AppSearch from '@/components/ui/search/Search';
-import { CircleUserRound, ShoppingCart } from 'lucide-react';
-import { toast } from 'react-toastify';
+import { CircleUserRound, ShoppingCart, LogOut } from 'lucide-react';
 import { IUserAuthServerData } from '@/types/auth.interface';
 import AuthService from '@/services/auth.service';
+import { useSession } from 'next-auth/react';
+import { signOut } from 'next-auth/react';
+import { useCart } from '@/hooks/useCart';
 
 interface INavbarProps {
   user: IUserAuthServerData | null;
 }
 
 const Navbar: FC = () => {
-  const [user, setUser] = useState<IUserAuthServerData | null>(AuthService.getUserFromStorage());
+  const session = useSession();
+  const { cartItems } = useCart();
+
+  console.log(session);
 
   const handleLogOut = async () => {
-    const logoutStatus = await AuthService.logout();
-    toast.info(logoutStatus.message);
+    await AuthService.logout();
+    await signOut();
   };
 
   return (
@@ -33,22 +38,28 @@ const Navbar: FC = () => {
             <h1 className={styles.header_link}>Fresh Food</h1>
           </Link>
 
-          <nav className="hidden gap-12 lg:flex 2xl:ml-16 mr-4">
+          <nav className={styles.nav}>
             {menu.map((item) => (
               <MenuItem item={item} key={item.link}></MenuItem>
             ))}
           </nav>
         </div>
-        <div className="flex items-center justify-between">
+        <div className={styles.controllers}>
           <AppSearch />
-          <Link className="mx-2" href="/cart">
+          <Link className="mx-4 relative" href="/cart">
             <ShoppingCart />
+            <div className="absolute flex items-center justify-center h-6 w-6 bg-primary rounded-full top-4 left-4 text-white">
+              <span className="text-sm font-semibold">{cartItems.length}</span>
+            </div>
           </Link>
-          {user ? <Link href="/profile"></Link> : ''}
-          {user ? (
-            <button onClick={handleLogOut}>Log out</button>
+          {session.data ? (
+            <div className={styles.btns}>
+              <button onClick={handleLogOut}>
+                <LogOut />
+              </button>
+            </div>
           ) : (
-            <Link className="mx-2" href="/auth/login">
+            <Link className="mx-2" href="/api/auth/signin">
               <CircleUserRound />
             </Link>
           )}

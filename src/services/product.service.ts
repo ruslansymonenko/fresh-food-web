@@ -1,5 +1,5 @@
 import { IProduct, IProductsServerResponse, TypeDataFilters } from '@/types/product.interface';
-import { axiosClassic } from '@/api/interceptors';
+import { axiosClassic } from '@/utils/api/interceptors';
 import { IServiceResponse } from '@/types/service.intrfecace';
 
 interface IProductService {
@@ -37,11 +37,11 @@ export class ProductService implements IProductService {
       if (data.products) {
         return this.sendStatus<IProduct[]>(true, 'Products received', data.products);
       } else {
-        return this.sendStatus<null>(true, 'Products not received', null);
+        return this.sendStatus<null>(false, 'Products not received', null);
       }
     } catch (error) {
       console.log(error);
-      return this.sendStatus<null>(true, 'Products not received', null);
+      return this.sendStatus<null>(false, 'Products not received', null);
     }
   }
 
@@ -52,11 +52,11 @@ export class ProductService implements IProductService {
       if (data) {
         return this.sendStatus<IProduct>(true, 'Products received', data);
       } else {
-        return this.sendStatus<null>(true, 'Products received', null);
+        return this.sendStatus<null>(false, 'Products not received', null);
       }
     } catch (error) {
       console.log(error);
-      return this.sendStatus<null>(true, 'Products not received', null);
+      return this.sendStatus<null>(false, 'Products not received', null);
     }
   }
 
@@ -69,11 +69,11 @@ export class ProductService implements IProductService {
       if (data) {
         return this.sendStatus<IProduct>(true, 'Products received', data);
       } else {
-        return this.sendStatus<null>(true, 'Products received', null);
+        return this.sendStatus<null>(false, 'Products not received', null);
       }
     } catch (error) {
       console.log(error);
-      return this.sendStatus<null>(true, 'Products not received', null);
+      return this.sendStatus<null>(false, 'Products not received', null);
     }
   }
 
@@ -86,11 +86,11 @@ export class ProductService implements IProductService {
       if (data) {
         return this.sendStatus<IProduct>(true, 'Products received', data);
       } else {
-        return this.sendStatus<null>(true, 'Products received', null);
+        return this.sendStatus<null>(false, 'Products not received', null);
       }
     } catch (error) {
       console.log(error);
-      return this.sendStatus<null>(true, 'Products not received', null);
+      return this.sendStatus<null>(false, 'Products not received', null);
     }
   }
 
@@ -103,11 +103,11 @@ export class ProductService implements IProductService {
       if (data) {
         return this.sendStatus<IProduct>(true, 'Products received', data);
       } else {
-        return this.sendStatus<null>(true, 'Products received', null);
+        return this.sendStatus<null>(false, 'Products not received', null);
       }
     } catch (error) {
       console.log(error);
-      return this.sendStatus<null>(true, 'Products not received', null);
+      return this.sendStatus<null>(false, 'Products not received', null);
     }
   }
 }

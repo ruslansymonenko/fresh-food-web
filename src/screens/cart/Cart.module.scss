@@ -5,3 +5,11 @@
 .title {
   @apply text-2xl font-bold text-gray-800 text-center;
 }
+
+.cart_container {
+  @apply grid md:grid-cols-3 gap-8 mt-12;
+}
+
+.cart_items {
+  @apply md:col-span-2 space-y-4;
+}

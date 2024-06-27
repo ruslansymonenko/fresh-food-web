@@ -1,20 +1,15 @@
 import { FC } from 'react';
 import cn from 'clsx';
+import styles from './Button.module.scss';
 
 export interface IButton extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  className?: string;
+  additionalClasses?: string;
+  btnType?: 'primary' | 'secondary' | 'inactive';
 }
 
-const Button: FC<IButton> = ({ children, className, ...props }) => {
+const Button: FC<IButton> = ({ children, additionalClasses, btnType = 'primary', ...props }) => {
   return (
-    <button
-      className={cn(
-        'text-white bg-rose-600 hover:bg-rose-500 font-semibold rounded-md text-sm px-4 py-2.5' +
-          ' w-full',
-        className,
-      )}
-      {...props}
-    >
+    <button className={cn(styles.button, additionalClasses, `${styles[btnType]}`)} {...props}>
       {children}
     </button>
   );

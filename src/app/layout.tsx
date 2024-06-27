@@ -30,10 +30,10 @@ export default function RootLayout({
       <Head>
         <link rel="shortcut icon" href="/website-logo.svg" />
       </Head>
-      <body className={font.className} suppressHydrationWarning={true}>
+      <body className={font.className}>
         <Providers>
           <Navbar />
-          {children}
+          <main className="pt-navbarHeight min-h-pageHeight mb-navbarHeight">{children}</main>
           <Footer />
           <CallRequest />
           <ToastContainer theme={'dark'} position={'bottom-right'} />

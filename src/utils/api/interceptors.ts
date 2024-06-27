@@ -2,7 +2,7 @@ import axios, { CreateAxiosDefaults } from 'axios';
 import { API_PATHS } from '@/consts/apiPaths';
 import { AuthService } from '@/services/auth.service';
 import { AuthTokenService } from '@/services/auth-token.service';
-import { errorCatch } from '@/api/errorCatch';
+import { errorCatch } from '@/utils/api/errorCatch';
 
 const options: CreateAxiosDefaults = {
   baseURL: `${API_PATHS.SERVER}/api`,

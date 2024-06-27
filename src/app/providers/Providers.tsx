@@ -3,9 +3,10 @@
 import { FC, PropsWithChildren, ReactNode, useState } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import { PersistGate } from 'redux-persist/integration/react';
-import { persistor, store } from '@/store/store';
 import { Provider } from 'react-redux';
+import { store, persistor } from '@/store/store';
+import { PersistGate } from 'redux-persist/integration/react';
+import { SessionProvider } from 'next-auth/react';
 
 interface IProvidersProps {
   children: ReactNode;
@@ -23,11 +24,15 @@ export const Providers: FC<PropsWithChildren> = ({ children }) => {
   );
 
   return (
-    <QueryClientProvider client={client}>
-      <Provider store={store}>
-        <PersistGate persistor={persistor}>{children}</PersistGate>
-      </Provider>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+    <>
+      <QueryClientProvider client={client}>
+        <Provider store={store}>
+          <PersistGate persistor={persistor}>
+            <SessionProvider>{children}</SessionProvider>
+            <ReactQueryDevtools initialIsOpen={false} />
+          </PersistGate>
+        </Provider>
+      </QueryClientProvider>
+    </>
   );
 };

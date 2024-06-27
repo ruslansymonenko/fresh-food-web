@@ -6,14 +6,12 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { IAuthFormData } from '@/types/auth.interface';
 import Loader from '@/components/ui/loader/Loader';
 import Button from '@/components/ui/button/Button';
-
 import styles from './LoginFrom.module.scss';
 import Field from '@/components/ui/field/Field';
 import { emailRegex } from '@/components/ui/forms/auth/email.regex';
-// import { useAuth } from '@/hooks/useCheckAuth';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
-import { AuthService } from '@/services/auth.service';
+import { signIn } from 'next-auth/react';
 
 const LoginForm: FC = ({}) => {
   const { handleSubmit, reset, control } = useForm<IAuthFormData>({
@@ -21,16 +19,22 @@ const LoginForm: FC = ({}) => {
   });
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
-  const authService = new AuthService();
 
   const onSubmit: SubmitHandler<IAuthFormData> = async (data) => {
     setIsLoading(true);
 
     try {
-      const responseStatus = await authService.login(data);
-      if (responseStatus) {
+      const authResult = await signIn('credentials', {
+        email: data.email,
+        password: data.password,
+        callbackUrl: '/',
+        redirect: false,
+      });
+      if (authResult && authResult.ok) {
         reset();
         router.push('/');
+      } else {
+        toast.error('Authorization error');
       }
     } catch (error) {
       toast.error('Authorization error, please, try later');
@@ -48,7 +52,7 @@ const LoginForm: FC = ({}) => {
           <p className="text-sm mt-10">
             Do not have an account{' '}
             <Link href="/auth/register" className={styles.text_link}>
-              Login here
+              Register here
             </Link>
           </p>
         </div>
@@ -81,9 +85,10 @@ const LoginForm: FC = ({}) => {
               placeholder="Enter password"
               type="password"
             />
-            <div className="mt-12">
-              <Button onClick={handleSubmit(onSubmit)}>Login</Button>
-            </div>
+            <Button onClick={handleSubmit(onSubmit)}>Login</Button>
+            {/*<div className="mt-12">*/}
+            {/*  <Link href={'/api/auth/signin'}>Login</Link>*/}
+            {/*</div>*/}
           </form>
         )}
       </div>

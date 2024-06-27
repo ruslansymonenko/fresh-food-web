@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 const Subscribe: FC = () => {
   return (
-    <div className="bg-rose-50 py-20 px-4 text-[#333] font-[sans-serif]">
+    <div className="bg-rose-50 py-20 px-4 text-[#333] font-[sans-serif] mb-10">
       <div className="max-w-4xl w-full mx-auto text-center">
         <h2 className="text-4xl md:text-5xl font-extrabold mb-6 leading-[45px]">
           Subscribe Our Newsletter

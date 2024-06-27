@@ -1,4 +1,5 @@
 import { configureStore, combineReducers } from '@reduxjs/toolkit';
+
 import {
   FLUSH,
   PAUSE,
@@ -9,8 +10,29 @@ import {
   REGISTER,
   REHYDRATE,
 } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-import { userSlice } from '@/store/user/user.slice';
+// import storage from 'redux-persist/lib/storage';
+import { cartSlice } from '@/store/cart/cart.slice';
+import createWebStorage from 'redux-persist/es/storage/createWebStorage';
+
+export function createPersistStore() {
+  const isServer = typeof window === 'undefined';
+  if (isServer) {
+    return {
+      getItem() {
+        return Promise.resolve(null);
+      },
+      setItem() {
+        return Promise.resolve();
+      },
+      removeItem() {
+        return Promise.resolve();
+      },
+    };
+  }
+  return createWebStorage('local');
+}
+
+const storage = typeof window !== 'undefined' ? createWebStorage('local') : createPersistStore();
 
 const persistConfig = {
   key: 'fresh-food',
@@ -19,7 +41,7 @@ const persistConfig = {
 };
 
 const rootReducer = combineReducers({
-  user: userSlice.reducer,
+  cart: cartSlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

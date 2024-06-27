@@ -1,5 +1,5 @@
 import { IReview, IReviewDto } from '@/types/review.interface';
-import { axiosClassic, axiosWithAuth } from '@/api/interceptors';
+import { axiosClassic, axiosWithAuth } from '@/utils/api/interceptors';
 import { IServiceResponse } from '@/types/service.intrfecace';
 
 interface IReviewService {
