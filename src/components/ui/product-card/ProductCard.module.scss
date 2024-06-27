@@ -1,0 +1,27 @@
+.card {
+  @apply bg-white shadow-md overflow-hidden rounded-lg cursor-pointer hover:-translate-y-2 transition-all relative flex flex-col;
+}
+
+.product_image_container {
+  @apply w-5/6 h-[260px] p-4 overflow-hidden mx-auto;
+}
+
+.product_data {
+  @apply p-6 bg-white flex flex-col justify-between flex-1;
+}
+
+.product_name {
+  @apply text-lg font-bold text-gray-800;
+}
+
+.product_price {
+  @apply text-lg text-rose-600 font-bold mt-2;
+}
+
+.product_description {
+  @apply text-gray-600 text-sm mt-2;
+}
+
+.rating {
+  @apply flex space-x-2 mt-4 self-end mb-4;
+}

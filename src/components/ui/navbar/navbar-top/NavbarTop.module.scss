@@ -1,0 +1,23 @@
+.header_top {
+  @apply flex items-center justify-between mx-auto max-w-2xl px-4 py-2 sm:px-6 lg:max-w-7xl;
+}
+
+.title {
+  @apply font-light text-sm;
+}
+
+.controllers {
+  @apply flex items-center justify-center;
+}
+
+.phone {
+  @apply text-primaryLight text-sm mr-4;
+}
+
+.call_btn {
+  @apply hover:underline hover:text-primary transition flex;
+}
+
+.call_btn_text {
+  @apply ml-2 text-sm;
+}

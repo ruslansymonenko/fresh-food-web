@@ -6,20 +6,18 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import ProductItem from '@/components/ui/product-showcase/product-item/ProductItem';
 import styles from '@/components/ui/product-showcase/ProductShowcase.module.scss';
+import { useGetProducts } from '@/hooks/useGetProducts';
 
-interface IProductsShowcaseProps {
-  products: IProduct[] | null;
-}
-
-const ProductsShowcase: FC<IProductsShowcaseProps> = ({ products }) => {
+const ProductsShowcase: FC = () => {
+  const { data, isLoading, isError } = useGetProducts();
   const [latestProducts, setLatestProducts] = useState<IProduct[] | null>(null);
 
   useEffect(() => {
-    if (products) {
-      const productsToSet: IProduct[] = products.slice(0, 4);
+    if (data) {
+      const productsToSet: IProduct[] = data.slice(0, 4);
       setLatestProducts(productsToSet);
     }
-  }, [products]);
+  }, [data]);
 
   return (
     <div className={styles.catalogue}>

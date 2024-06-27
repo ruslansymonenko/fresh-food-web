@@ -33,7 +33,7 @@ export default function RootLayout({
       <body className={font.className}>
         <Providers>
           <Navbar />
-          {children}
+          <main className="pt-navbarHeight min-h-pageHeight mb-navbarHeight">{children}</main>
           <Footer />
           <CallRequest />
           <ToastContainer theme={'dark'} position={'bottom-right'} />

@@ -1,10 +1,11 @@
 'use client';
 
 import React, { FC } from 'react';
-import { IMenuItem } from '@/components/ui/navbar/nemu.interface';
+import { IMenuItem } from '@/components/ui/navbar/menu.interface';
 import Link from 'next/link';
 import cn from 'clsx';
 import { usePathname } from 'next/navigation';
+import styles from './Navbar.module.scss';
 
 interface IMenuItemProps {
   item: IMenuItem;
@@ -14,16 +15,15 @@ const MenuItem: FC<IMenuItemProps> = ({ item }) => {
   const pathname = usePathname();
 
   return (
-    <div className="flex justify-center">
+    <div className={styles.menu_item}>
       <Link
         href={item.link}
         className={cn(
-          'flex justify-center text-base font-medium transition duration-100' +
-            ' hover:text-rose-600',
-          pathname === item.link ? 'text-rose-600' : 'text-gray-600',
+          styles.menu_item_link,
+          pathname === item.link ? 'text-primary' : 'text-gray-600',
         )}
       >
-        <span className="flex justify-center items-center">{item.name}</span>
+        <span className={styles.menu_item_text}>{item.name}</span>
       </Link>
     </div>
   );

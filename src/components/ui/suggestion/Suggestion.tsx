@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const Suggestion: FC = () => {
   return (
-    <div className="bg-white text-[#333] p-8 font-[sans-serif]">
+    <div className="bg-white text-[#333] px-8 pt-4 font-[sans-serif]">
       <div className="max-w-xl mx-auto text-center">
         <h2 className="text-4xl font-extrabold relative after:absolute after:-bottom-5 after:h-1 after:w-1/2 after:bg-rose-400 after:left-0 after:right-0 after:mx-auto after:rounded-full">
           Do you want to try our products?
