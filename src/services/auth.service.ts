@@ -9,7 +9,6 @@ interface IAuthService {
   register(data: IAuthFormData): Promise<IServiceResponse<IUserAuthServerData | null>>;
   getToken(): Promise<IServiceResponse<IUserAuthServerData | null>>;
   getUserFromStorage(): IUserAuthServerData | null;
-  removeUserFromStorage(): void;
   saveToStorage(data: IUserAuthServerData): void;
   logout(): Promise<IServiceResponse<null>>;
 }
@@ -105,10 +104,6 @@ export class AuthService implements IAuthService {
 
   saveToStorage(data: IUserAuthServerData) {
     this.authTokenService.saveTokenStorage(data.accessToken);
-  }
-
-  removeUserFromStorage() {
-    // localStorage.removeItem('user');
   }
 
   async logout() {
